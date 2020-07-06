@@ -6,13 +6,16 @@ tokens = [
     "MINUS",
     "TIMES",
     "DIVIDE",
+    "POTENCIA",
+    "PUNTOYCOMA"
 ]
 
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
-
+t_POTENCIA = r'\*\*'
+t_PUNTOYCOMA = r'\;'
 t_ignore = " \t"
 
 #definimos una funcion que castee un valor a NUMBER
