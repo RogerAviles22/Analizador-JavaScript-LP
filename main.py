@@ -4,13 +4,15 @@ reserved = {
   'if' : 'IF',
   'else' : 'ELSE',
   'elif' : 'ELIF',
-  'switch' : 'SWITCH',
-  'case' : 'CASE',
-  'break' : 'BREAK',
-  'default' : 'DEFAULT',
   'for' : 'FOR',
-  'var' : 'VAR'
-
+  'var' : 'VAR',
+  'while' : 'WHILE',
+  'String': 'STRING',
+  'Array': 'ARRAY',
+  'Set': 'SET',
+  'Object': 'OBJECT',
+  'Console': 'CONSOLE',
+  'Prompt' : 'PROMPT',
 }
 
 tokens = [
@@ -20,6 +22,7 @@ tokens = [
     "TIMES",
     "DIVIDE",
     "POTENCIA",
+    "PUNTO",
     "PUNTOYCOMA",
     "LPAREN",
     "RPAREN",
@@ -29,17 +32,23 @@ tokens = [
     "RLLAVE",
     "COMA",
     "COMILLA",
+    "COMILLITA",
     "ID",
-    "IGUAL"
+    "IGUAL",
+    "DOSPUNTOS",
 ] + list(reserved.values())
 
+#Operaciones Matemáticas
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_POTENCIA = r'\*\*'
+#Simbolos
+t_PUNTO = r'\.'
 t_PUNTOYCOMA = r'\;'
 t_IGUAL = r'='
+t_DOSPUNTOS = r':'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LCORCH = r'\['
@@ -47,21 +56,26 @@ t_RCORCH = r'\]'
 t_LLLAVE = r'\{'
 t_RLLAVE = r'\}'
 t_COMA = r'\,'
+t_COMILLA = r'\"'
+t_COMILLITA = r'\''
+#Variables y tipos
 t_IF = r'if'
 t_ELSE = r'else'
 t_ELIF = r'elif'
-t_SWITCH = r'switch'
-t_CASE = r'case'
-t_BREAK = r'break'
-t_DEFAULT = r'default'
 t_FOR = r'for'
 t_VAR = r'var'
-t_COMILLA = r'\"'
+t_WHILE = r'while'
+t_STRING = r'String'
+t_ARRAY = r'Array'
+t_SET = r'Set'
+t_OBJECT = r'Object'
+t_CONSOLE = r'Console'
+t_PROMPT = r'Prompt'
 
-
-
+#Ignora los espacios y tab
 t_ignore = " \t"
-
+#Ignora los comentarios que empiezan con numeral // o /* */
+t_ignore_COMMENT = r'(//.*|/\*.*\*/)'
 
 
 
@@ -90,7 +104,7 @@ def t_error(t):
 lexer = lex.lex()
 
 #Prueba unitaria
-data = input("Ingrese la expresion aritmetica a analizar: ")
+data = input("Ingrese la expresion a analizar: ")
 lexer.input(data)
 
 while True:
