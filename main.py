@@ -36,6 +36,17 @@ tokens = [
     "ID",
     "IGUAL",
     "DOSPUNTOS",
+    "AND",
+    "OR",
+    "NOT",
+    "IGUALA",
+    "MAYOR",
+    "MENOR",
+    "DIFERENTE",
+    "MAYORIG",
+    "MENORIG"
+
+
 ] + list(reserved.values())
 
 #Operaciones Matemáticas
@@ -71,6 +82,18 @@ t_SET = r'Set'
 t_OBJECT = r'Object'
 t_CONSOLE = r'Console'
 t_PROMPT = r'Prompt'
+#Condicionales
+t_AND = r'\&\&'
+t_OR = r'\|\|'
+t_NOT = r'!'
+#Comparadores
+t_IGUALA = r'=='
+t_MAYOR = r'>'
+t_MENOR = r'<'
+t_DIFERENTE = r'!='
+t_MAYORIG = r'>='
+t_MENORIG = r'<='
+
 
 #Ignora los espacios y tab
 t_ignore = " \t"
