@@ -137,7 +137,19 @@ def t_error(t):
     print("Caracter no Definido '%s'" % t.value[0])
     t.lexer.skip(1)  #skip(n) Omite n caracteres del input
 
-
+def lexenizador(data, mensaje):
+  print("\nCódigo: \n"+data+"\n")
+  #Construir el lexer, el encargado de identificar los tokens que han sido definidos
+  lexer = lex.lex()
+  lexer.input(data)
+  print(mensaje)
+  while True:
+    #Devuelve los tokens que coincida con la entrada
+      tok = lexer.token() 
+      if not tok:
+          break
+      #print("LexToken(t.type, t.value, t.lineno, t.lexpos)")
+      print(tok)
 
 
 print("EJEMPLOS DE VICTOR\n")
@@ -146,28 +158,10 @@ data4 = "var a +=1"
 lexenizador(data4,"\nEjemplo1")
 
 data5 = " //este es un comentario"
-lexenizador(data5,"\nEjemeplo2")
+lexenizador(data5,"\nEjemplo2")
 
-data6  " if(v.lenght==2): \n console.log('"'c'"')";
+data6 = " if(v.lenght==2): \n console.log('"'c'"')";
 lexenizador(data6,"\nEjemplo3")
-
-
-print("\nEJEMPLOS DE LIVINGSTON\n")
-
-#print("\nEJEMPLO 1\n")
-data7 = "var texto = 'Hola mundo.'"        
-#Prueba unitaria
-lexenizador(data7, "\nEjemplo 1")
-
-#print("\nEJEMPLO 2\n")
-data8 = "if (3>5): console.log('Verdadero') else: console.log('Falso')"     
-#Prueba unitaria
-lexenizador(data8, "\nEjemplo 2")
-
-#print("\nEJEMPLO 3\n")
-data9 = "var paises = ['Ecuador', 'Chile', 'Venezuela', 'España']"       
-#Prueba unitaria
-lexenizador(data9, "\nEjemplo 3")
 
 
 print("Listo lex de PLY")
