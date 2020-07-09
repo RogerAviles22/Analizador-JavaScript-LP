@@ -151,10 +151,30 @@ def lexenizador(data, mensaje):
       #print("LexToken(t.type, t.value, t.lineno, t.lexpos)")
       print(tok)
 
+print("EJEMPLOS DE ROGER\n")
+#9 lineas validadas de los integrantes
+data1 = """for( var i=0 ; i<8 ; i++ ){
+    /*Comentario mi llave*/ 
+    var _texto = 'Prueba 1.1 8556 8,6';
+} \n"""        
+#Prueba unitaria
+#data = input("Ingrese la expresion a analizar: ")
+data2 = """while( (5>=8 && !(9<2)) || x<y ){
+  var objecto1 = {
+    a: 'somestring',
+    b: 42
+   }
+}"""
+data3 = """var nombre =prompt('Ingrese su nombre:');
+nombre.length"""
 
-print("EJEMPLOS DE VICTOR\n")
+lexenizador(data1, "Ejercicio 1")
+lexenizador(data2, "Ejercicio 2")
+lexenizador(data3, "Ejercicio 3")
 
-data4 = "var a +=1"
+print("\nEJEMPLOS DE VICTOR\n")
+
+data4 = "var a = new Set();"
 lexenizador(data4,"\nEjemplo1")
 
 data5 = " //este es un comentario"
