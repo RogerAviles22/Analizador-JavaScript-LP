@@ -184,5 +184,24 @@ data6 = " if(v.lenght==2): \n console.log('"'c'"')";
 lexenizador(data6,"\nEjemplo3")
 
 
+print("\nEJEMPLOS DE LIVINGSTON\n")
+
+#print("\nEJEMPLO 1\n")
+data7 = "var texto = 'Hola mundo.'"        
+#Prueba unitaria
+lexenizador(data7, "\nEjemplo 1")
+
+#print("\nEJEMPLO 2\n")
+data8 = "if (3>5): console.log('Verdadero') else: console.log('Falso')"     
+#Prueba unitaria
+lexenizador(data8, "\nEjemplo 2")
+
+#print("\nEJEMPLO 3\n")
+data9 = "var paises = ['Ecuador', 'Chile', 'Venezuela', 'Argentina']"       
+#Prueba unitaria
+lexenizador(data9, "\nEjemplo 3")
+
+
+
 print("Listo lex de PLY")
 
