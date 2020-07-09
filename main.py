@@ -7,12 +7,13 @@ reserved = {
   'for' : 'FOR',
   'var' : 'VAR',
   'while' : 'WHILE',
-  'String': 'STRING',
-  'Array': 'ARRAY',
-  'Set': 'SET',
-  'Object': 'OBJECT',
-  'Console': 'CONSOLE',
-  'Prompt' : 'PROMPT',
+  #'String': 'STRING',
+  #'Array': 'ARRAY',
+  'set': 'SET',
+  #'Object': 'OBJECT',
+  'console': 'CONSOLE',
+  'prompt' : 'PROMPT',
+  'new' : 'NEW',
 }
 
 tokens = [
@@ -44,8 +45,13 @@ tokens = [
     "MENOR",
     "DIFERENTE",
     "MAYORIG",
-    "MENORIG"
-
+    "MENORIG",
+    "METODO",
+    "INCREMENTAL",
+    "DECREMENTAL",
+    "MASGUAL",
+    "MENGUAL",
+    #"TEXTO",
 
 ] + list(reserved.values())
 
@@ -69,6 +75,10 @@ t_RLLAVE = r'\}'
 t_COMA = r'\,'
 t_COMILLA = r'\"'
 t_COMILLITA = r'\''
+t_INCREMENTAL = r'\+\+'
+t_DECREMENTAL = r'--'
+t_MASGUAL = r'\+='
+t_MENGUAL = r'-='
 #Variables y tipos
 t_IF = r'if'
 t_ELSE = r'else'
@@ -76,12 +86,13 @@ t_ELIF = r'elif'
 t_FOR = r'for'
 t_VAR = r'var'
 t_WHILE = r'while'
-t_STRING = r'String'
-t_ARRAY = r'Array'
+#t_STRING = r'String'
+#t_ARRAY = r'Array'
 t_SET = r'Set'
-t_OBJECT = r'Object'
-t_CONSOLE = r'Console'
-t_PROMPT = r'Prompt'
+t_NEW = r'new'
+#t_OBJECT = r'Object'
+t_CONSOLE = r'console'
+t_PROMPT = r'prompt'
 #Condicionales
 t_AND = r'\&\&'
 t_OR = r'\|\|'
@@ -93,20 +104,23 @@ t_MENOR = r'<'
 t_DIFERENTE = r'!='
 t_MAYORIG = r'>='
 t_MENORIG = r'<='
-
-
+#Digito
+t_NUMBER= r'\d+(\.\d+)?'
+#t_TEXTO = r'(\".*\"|\'.*\')'
+#Solo ingresa letras, no numeros
+t_METODO = r'\.([a-z]|[A-Z])+'
 #Ignora los espacios y tab
-t_ignore = " \t"
+t_ignore = " \t\n"
 #Ignora los comentarios que empiezan con numeral // o /* */
 t_ignore_COMMENT = r'(//.*|/\*.*\*/)'
 
 
 
 #definimos una funcion que castee un valor a NUMBER
-def t_NUMBER(t):
+"""def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
-    return t
+    return t"""
 
 #definimos una funcion que castee un valor a STRING
 def t_ID(t):
@@ -123,19 +137,38 @@ def t_error(t):
     print("Caracter no Definido '%s'" % t.value[0])
     t.lexer.skip(1)  #skip(n) Omite n caracteres del input
 
-#Construir el lexer, el encargado de identificar los tokens que han sido definidos
-lexer = lex.lex()
 
+
+
+print("EJEMPLOS DE VICTOR\n")
+
+data4 = "var a +=1"
+lexenizador(data4,"\nEjemplo1")
+
+data5 = " //este es un comentario"
+lexenizador(data5,"\nEjemeplo2")
+
+data6  " if(v.lenght==2): \n console.log('"'c'"')";
+lexenizador(data6,"\nEjemplo3")
+
+
+print("\nEJEMPLOS DE LIVINGSTON\n")
+
+#print("\nEJEMPLO 1\n")
+data7 = "var texto = 'Hola mundo.'"        
 #Prueba unitaria
-data = input("Ingrese la expresion a analizar: ")
-lexer.input(data)
+lexenizador(data7, "\nEjemplo 1")
 
-while True:
-    tok = lexer.token() #Devuelve los tokens que coincida con la entrada
-    if not tok:
-        break
-    #print("LexToken(t.type, t.value, t.lineno, t.lexpos)")
-    print(tok)
+#print("\nEJEMPLO 2\n")
+data8 = "if (3>5): console.log('Verdadero') else: console.log('Falso')"     
+#Prueba unitaria
+lexenizador(data8, "\nEjemplo 2")
+
+#print("\nEJEMPLO 3\n")
+data9 = "var paises = ['Ecuador', 'Chile', 'Venezuela', 'España']"       
+#Prueba unitaria
+lexenizador(data9, "\nEjemplo 3")
 
 
 print("Listo lex de PLY")
+
