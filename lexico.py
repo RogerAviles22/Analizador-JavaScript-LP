@@ -7,10 +7,7 @@ reserved = {
   'for' : 'FOR',
   'var' : 'VAR',
   'while' : 'WHILE',
-  #'String': 'STRING',
-  #'Array': 'ARRAY',
   'set': 'SET',
-  #'Object': 'OBJECT',
   'console': 'CONSOLE',
   'prompt' : 'PROMPT',
   'new' : 'NEW',
@@ -41,18 +38,13 @@ tokens = [
     "OR",
     "NOT",
     "IGUALA",
-    "MAYOR",
-    "MENOR",
     "DIFERENTE",
-    "MAYORIG",
-    "MENORIG",
     "METODO",
     "INCREMENTAL",
     "DECREMENTAL",
-    "MASGUAL",
-    "MENGUAL",
+    "OPERADORES",
     "TEXTO",
-    #"COMPARADOR",
+    "COMPARADOR",
 
 ] + list(reserved.values())
 
@@ -78,8 +70,7 @@ t_COMILLA = r'\"'
 t_COMILLITA = r'\''
 t_INCREMENTAL = r'\+\+'
 t_DECREMENTAL = r'--'
-t_MASGUAL = r'\+='
-t_MENGUAL = r'-='
+t_OPERADORES = r'(\+|-|\*|/|\*\*)='
 #Variables y tipos
 t_IF = r'if'
 t_ELSE = r'else'
@@ -87,11 +78,8 @@ t_ELIF = r'elif'
 t_FOR = r'for'
 t_VAR = r'var'
 t_WHILE = r'while'
-#t_STRING = r'String'
-#t_ARRAY = r'Array'
 t_SET = r'Set'
 t_NEW = r'new'
-#t_OBJECT = r'Object'
 t_CONSOLE = r'console'
 t_PROMPT = r'prompt'
 #Condicionales
@@ -100,18 +88,14 @@ t_OR = r'\|\|'
 t_NOT = r'!'
 #Comparadores
 t_IGUALA = r'=='
-t_MAYOR = r'>'
-t_MENOR = r'<'
 t_DIFERENTE = r'!='
-t_MAYORIG = r'>='
-t_MENORIG = r'<='
-#t_COMPARADOR = r'[<>]=?' Compara con < , >, <=, >=
+t_COMPARADOR = r'[<>]=?' #Compara con < , >, <=, >=
 #Digito
 t_NUMBER= r'\d+(\.\d+)?'
 #CADENA
 t_TEXTO = r'(\'[a-zA-Z0-9\!\s\.,:À-ÿ\u00f1\u00d1]*\'|\"[a-zA-Z0-9\!\s\.,:À-ÿ\u00f1\u00d1]*\")'
 #t_TEXTO= r'\'.*\'' Lee todo como texto desde donde empieza la comilla hasta donde termine
-#Solo ingresa letras, no numeros Ej: var paises = ['Ecuador', 'Chile', 'Venezuela', 'Argentina'] todo desde 'Ecuador...Argentina' lo considera texto
+#Ej: var paises = ['Ecuador', 'Chile', 'Venezuela', 'Argentina'] todo desde 'Ecuador...Argentina' lo considera texto
 t_METODO = r'\.([a-z]|[A-Z])+'
 #Ignora los espacios y tab
 t_ignore = " \t\n"
@@ -164,12 +148,15 @@ data1 = """for( var i=0 ; i<8 ; i++ ){
     var Texto8= "Prueba 2 con ñ y tíldé Con símbolos permitidos !.:,";
 } \n"""        
 
-data2 = """while( (5>=8 && !(9<2)) || x<y ){
+data2 = """while( (5>=8 && !(9<2)) || x<y || a!=b){
   var objecto1 = {
     a: 'somestring',
     b: 42,
     c: 45.89524
    }
+   a+=5;
+   x**=8;
+   b++;
 }"""
 data3 = """var nombre =prompt('Ingrese su nombre:');
 nombre.length"""
@@ -183,7 +170,7 @@ print("\nEJEMPLOS DE VICTOR\n")
 data4 = "var a = new Set();"
 lexenizador(data4,"\nEjemplo1")
 
-data5 = " //este es un comentario"
+data5 = " //este es un comentario \n var suma= 5+8"
 lexenizador(data5,"\nEjemplo2")
 
 data6 = " if(v.lenght==2): \n console.log('"'c'"');";
@@ -203,7 +190,7 @@ data8 = "if (3>5): console.log('Verdadero'); else: console.log('Falso');"
 lexenizador(data8, "\nEjemplo 2")
 
 #print("\nEJEMPLO 3\n")
-data9 = "var paises = ['Ecuador', 'Chile', 'Venezuela', 'Argentina']"       
+data9 = "var paises = ['Ecuador', 'Chile', 'Venezuela', 'Argentina'] \nvar aumentar=5; aumentar*=8; aumentar/=10.5; aumentar++; aumentar--; aumentar=20;"       
 #Prueba unitaria
 lexenizador(data9, "\nEjemplo 3")
 
