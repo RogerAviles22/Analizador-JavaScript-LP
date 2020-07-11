@@ -1,3 +1,2 @@
-import lexico as lex
-
-tokens = lex.tokens
+import sintactico as lexsint
+lexsint.sintactico()

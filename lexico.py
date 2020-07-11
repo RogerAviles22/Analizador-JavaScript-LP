@@ -112,7 +112,7 @@ t_ignore_COMMENT = r'(//.*|/\*.*\*/)'
 
 #definimos una funcion que castee un valor a STRING
 def t_ID(t):
-    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    r'_?[a-zA-Z][a-zA-Z_0-9]*'
     t.type = reserved.get(t.value, 'ID')  # Check for reserved words
     return t
 
@@ -162,9 +162,9 @@ data3 = """var nombre =prompt('Ingrese su nombre:');
 nombre.length"""
 
 lexenizador(data1, "Ejercicio 1")
-lexenizador(data2, "Ejercicio 2")
-lexenizador(data3, "Ejercicio 3")
-
+#lexenizador(data2, "Ejercicio 2")
+#lexenizador(data3, "Ejercicio 3")
+"""
 print("\nEJEMPLOS DE VICTOR\n")
 
 data4 = "var a = new Set();"
@@ -195,3 +195,4 @@ data9 = "var paises = ['Ecuador', 'Chile', 'Venezuela', 'Argentina'] \nvar aumen
 lexenizador(data9, "\nEjemplo 3")
 
 print("Listo lex de PLY")
+"""
