@@ -2,12 +2,15 @@ import ply.yacc as sintaxis
 import lexico as lex
 tokens = lex.tokens
 
+#Ojo a 'expresion'
 def p_sentencias(p):
     '''sentencias : variable sentencias
     | expresion sentencias
     | metodos sentencias
     | iteracion sentencias
     | objeto PUNTOYCOMA sentencias
+    | newset sentencias
+    | array sentencias
     | empty
     '''
 
@@ -56,8 +59,32 @@ def p_objeto_kv(p):
   | ID DOSPUNTOS factor COMA
   '''
 
+def p_set(p):#confirma Movarreira
+  '''newset : VAR ID IGUAL NEW SET LPAREN RPAREN PUNTOYCOMA
+  | VAR ID IGUAL NEW SET LPAREN contenido RPAREN PUNTOYCOMA'''
+
+def p_array(p):
+  'array : VAR ID IGUAL contenido PUNTOYCOMA'
+
+def p_contenido(p):
+  '''contenido : LCORCH elemento RCORCH
+  | LCORCH RCORCH
+  | LCORCH expresion RCORCH'''
+
+def p_elemento(p):
+  '''elemento : expresion 
+  | expresion COMA elemento '''
+
+
+#def p_contenido(p):
+#  '''contenido : expresion
+#      | expresion COMA contenido
+
+#  '''
+
 def p_expresion_suma(p):
     'expresion : expresion PLUS factor'
+
 
 def p_expresion_resta(p):
     'expresion : expresion MINUS term'
@@ -76,12 +103,13 @@ def p_expression_term(p):
 
 #!(5+8)<2 && a!=3 && 
 def p_condicion_operador(p):
-  '''condi_anidado : condicion AND  condi_anidado
+  '''condi_anidado : condicion AND condi_anidado
   | NOT condicion AND  condi_anidado 
   | condicion OR  condi_anidado
   | NOT condicion OR  condi_anidado
   | condicion 
   | NOT condicion '''
+
 
 # (5+2) <,>,<=,>=,!=,== 8
 def p_condicion(p):

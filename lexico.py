@@ -7,7 +7,7 @@ reserved = {
   'for' : 'FOR',
   'var' : 'VAR',
   'while' : 'WHILE',
-  'set': 'SET',
+  'Set': 'SET',
   'console': 'CONSOLE',
   'prompt' : 'PROMPT',
   'new' : 'NEW',
@@ -148,6 +148,7 @@ data1 = """for( var i=0 ; i<8 ; i++ ){
     //Comentario de largoooooo
     var _texto = 'Prueba 1.1 8556 8,6 con ñÑ y tíldéÁ';
     var Texto8= "Prueba 2 con ñ y tíldé Con símbolos permitidos !.:,";
+    var conjunto = new Set();
 } \n"""        
 
 data2 = """while( (5>=8 && !(9<2)) || x<y || a!=b){

@@ -13,5 +13,7 @@
 '--------FALTA'
 'Estructura if-else y while'
 'Definir set'
+'Definir Array'
 'Estructura del Prompt'
 'Presentar mensajes personalizados'
+'Definir el true y false como palabra reservada'
