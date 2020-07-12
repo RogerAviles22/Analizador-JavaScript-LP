@@ -11,9 +11,9 @@
 
 
 '--------FALTA'
-'Estructura if-else y while'
-'Definir set'
-'Definir Array'
+'Estructura if-else y while' (yala)
+'Definir set' (yala)
+'Definir Array' (yala)
 'Estructura del Prompt'
 'Presentar mensajes personalizados'
 'Definir el true y false como palabra reservada'

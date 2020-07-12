@@ -12,6 +12,9 @@ def p_sentencias(p):
     | newset sentencias
     | array sentencias
     | empty
+    | if
+    | while
+    | prompt
     '''
 
 def p_metodos(p):
@@ -30,6 +33,29 @@ def p_variable(p):
 def p_for(p):
   '''iteracion : FOR LPAREN ID IGUAL NUMBER PUNTOYCOMA condicion PUNTOYCOMA ID INDECREMENTAL RPAREN LLLAVE sentencias RLLAVE'''
   
+
+def p_if(p):
+  '''if : IF LPAREN condi_anidado RPAREN LLLAVE sentencias RLLAVE
+  | IF LPAREN condi_anidado RPAREN LLLAVE sentencias RLLAVE else
+  | IF LPAREN condi_anidado RPAREN LLLAVE sentencias RLLAVE elif else
+  '''
+
+def p_else(p):
+  'else : ELSE LLLAVE sentencias RLLAVE'
+
+def p_elif(p):
+  ''' elif : ELIF LPAREN condi_anidado RPAREN LLLAVE sentencias RLLAVE elif 
+  | ELIF LPAREN condi_anidado RPAREN LLLAVE sentencias RLLAVE 
+  '''
+
+def p_while(p):
+  'while : WHILE LPAREN condi_anidado RPAREN LLLAVE sentencias RLLAVE'
+
+def p_prompt(p):
+  '''prompt : VAR ID IGUAL PROMPT LPAREN expresion RPAREN PUNTOYCOMA
+  | VAR ID IGUAL PROMPT LPAREN expresion COMA expresion RPAREN PUNTOYCOMA
+  '''
+
 #console.log('');
 def p_imprimir(p):
   'imprimir : CONSOLE METODO LPAREN expresion RPAREN'
@@ -115,7 +141,10 @@ def p_condicion_operador(p):
 def p_condicion(p):
     '''condicion : factor COMPARADOR factor
     | factor IGUALA factor
-    | factor DIFERENTE factor'''
+    | factor DIFERENTE factor
+    | TRUE
+    | FALSE
+    '''
 
 def p_term_factor(p):
     'term : factor'

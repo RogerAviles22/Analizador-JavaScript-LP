@@ -11,6 +11,8 @@ reserved = {
   'console': 'CONSOLE',
   'prompt' : 'PROMPT',
   'new' : 'NEW',
+  'true' : 'TRUE',
+  'false' : 'FALSE'
 }
 
 tokens = [
@@ -84,6 +86,8 @@ t_SET = r'Set'
 t_NEW = r'new'
 t_CONSOLE = r'console'
 t_PROMPT = r'prompt'
+t_TRUE = r'true'
+t_FALSE = r'false'
 #Condicionales
 t_AND = r'\&\&'
 t_OR = r'\|\|'
@@ -140,6 +144,7 @@ def lexenizador(data, mensaje):
           break
       #print("LexToken(t.type, t.value, t.lineno, t.lexpos)")
       print(tok)
+
 
 print("EJEMPLOS DE ROGER\n")
 #9 lineas validadas de los integrantes
