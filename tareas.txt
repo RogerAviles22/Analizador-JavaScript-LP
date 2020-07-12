@@ -1,0 +1,17 @@
+'--------HECHO'
+"Escrito sintaxis para operaciones matemáticas."
+'Concatenacion explicita con elementos como 5+(expresion).'
+'Algunos elementos deben terminar con punto y coma.'
+'Creado ciclo de sentencias para agregar más de unas variables.'
+'Creado for con su sintaxis y agregar + código dentro de su cuerpo.'
+'Creado objeto que puede tener más de un valor siempre y cuando tenga una coma al final del último value.'
+'Creada las condicionales anidadas, falta preguntar si se desea que se agrupen por parentesis'
+'Creado metodos de 0,1 y 2 argumentos, tambien sintaxis de los atributos y sintaxis para imprimir.'
+'Agregada produccion "empty" para cerrar ciclos infinitos'
+
+
+'--------FALTA'
+'Estructura if-else y while'
+'Definir set'
+'Estructura del Prompt'
+'Presentar mensajes personalizados'

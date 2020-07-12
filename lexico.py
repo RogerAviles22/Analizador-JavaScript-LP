@@ -40,8 +40,9 @@ tokens = [
     "IGUALA",
     "DIFERENTE",
     "METODO",
-    "INCREMENTAL",
-    "DECREMENTAL",
+    #"INCREMENTAL",
+    #"DECREMENTAL",
+    "INDECREMENTAL",
     "OPERADORES",
     "TEXTO",
     "COMPARADOR",
@@ -68,8 +69,9 @@ t_RLLAVE = r'\}'
 t_COMA = r'\,'
 t_COMILLA = r'\"'
 t_COMILLITA = r'\''
-t_INCREMENTAL = r'\+\+'
-t_DECREMENTAL = r'--'
+t_INDECREMENTAL = r'(\+\+|--)'
+#t_INCREMENTAL = r'\+\+'
+#t_DECREMENTAL = r'--'
 t_OPERADORES = r'(\+|-|\*|/|\*\*)='
 #Variables y tipos
 t_IF = r'if'
@@ -156,7 +158,7 @@ data2 = """while( (5>=8 && !(9<2)) || x<y || a!=b){
    }
    a+=5;
    x**=8;
-   b++;
+   b++; c--;
 }"""
 data3 = """var nombre =prompt('Ingrese su nombre:');
 nombre.length"""

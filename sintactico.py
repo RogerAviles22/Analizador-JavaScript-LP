@@ -3,14 +3,18 @@ import lexico as lex
 tokens = lex.tokens
 
 def p_sentencias(p):
-    '''sentencias : variable
-    | expresion
-    | metodos
+    '''sentencias : variable sentencias
+    | expresion sentencias
+    | metodos sentencias
+    | iteracion sentencias
+    | objeto PUNTOYCOMA sentencias
+    | empty
     '''
 
 def p_metodos(p):
-    '''metodos : imprimir
-    | condi_anidado'''
+    '''metodos : imprimir PUNTOYCOMA
+    | condi_anidado
+    | metodo PUNTOYCOMA'''
 
 #var _var; var a58a= ''; var _As=54;
 def p_variable(p):
@@ -19,9 +23,38 @@ def p_variable(p):
   | VAR ID IGUAL condi_anidado PUNTOYCOMA
   '''
 
+#for(i=0; i<=8; i--){}  
+def p_for(p):
+  '''iteracion : FOR LPAREN ID IGUAL NUMBER PUNTOYCOMA condicion PUNTOYCOMA ID INDECREMENTAL RPAREN LLLAVE sentencias RLLAVE'''
+  
 #console.log('');
 def p_imprimir(p):
   'imprimir : CONSOLE METODO LPAREN expresion RPAREN'
+
+#métodos con y sin argumentos, máximo 2 arg
+def p_metodo_argumento0(p):
+  'metodo : ID METODO LPAREN RPAREN'
+
+def p_metodo_argumento1(p):
+  'metodo : ID METODO LPAREN expresion RPAREN'
+
+def p_metodo_argumento2(p):
+  'metodo : ID METODO LPAREN expresion COMA expresion RPAREN'
+  
+#No es un método, en sí sería el atributo de una variable
+def p_metodo_argumento3(p):
+  'metodo : ID METODO'
+
+#var id={b:"8", c:(5+2), c:'a'}
+def p_objeto(p):
+  '''objeto : VAR ID IGUAL LLLAVE RLLAVE  
+  | VAR ID IGUAL LLLAVE keyvalue RLLAVE   
+  '''
+#a:8,   b:"a", c:8.5
+def p_objeto_kv(p):
+  '''keyvalue : ID DOSPUNTOS factor COMA keyvalue
+  | ID DOSPUNTOS factor COMA
+  '''
 
 def p_expresion_suma(p):
     'expresion : expresion PLUS factor'
@@ -70,6 +103,11 @@ def p_factor_str(p):
 
 def p_factor_var2(p):
     'factor : ID'
+
+#Ayudará para cerrar los bucles de las sentencias?
+def p_empty(p):
+     'empty :'
+     pass
 
 # Error generado
 def p_error(p):

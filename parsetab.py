@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND COMA COMILLA COMILLITA COMPARADOR CONSOLE DECREMENTAL DIFERENTE DIVIDE DOSPUNTOS ELIF ELSE FOR ID IF IGUAL IGUALA INCREMENTAL LCORCH LLLAVE LPAREN METODO MINUS NEW NOT NUMBER OPERADORES OR PLUS POTENCIA PROMPT PUNTO PUNTOYCOMA RCORCH RLLAVE RPAREN SET TEXTO TIMES VAR WHILEsentencias : variable\n    | expresion\n    | metodos\n    metodos : imprimir\n    | condi_anidadovariable : VAR ID PUNTOYCOMA\n  | VAR ID IGUAL expresion PUNTOYCOMA\n  | VAR ID IGUAL condi_anidado PUNTOYCOMAimprimir : CONSOLE METODO LPAREN expresion RPARENexpresion : expresion PLUS factorexpresion : expresion MINUS termexpresion : expresion TIMES termexpresion : expresion DIVIDE termexpresion : expresion POTENCIA termexpresion : termcondi_anidado : condicion AND  condi_anidado\n  | NOT condicion AND  condi_anidado \n  | condicion OR  condi_anidado\n  | NOT condicion OR  condi_anidado\n  | condicion \n  | NOT condicion condicion : factor COMPARADOR factor\n    | factor IGUALA factor\n    | factor DIFERENTE factorterm : factorfactor : LPAREN expresion RPARENfactor : NUMBERfactor : TEXTOfactor : ID'
+_lr_signature = 'AND COMA COMILLA COMILLITA COMPARADOR CONSOLE DIFERENTE DIVIDE DOSPUNTOS ELIF ELSE FOR ID IF IGUAL IGUALA INDECREMENTAL LCORCH LLLAVE LPAREN METODO MINUS NEW NOT NUMBER OPERADORES OR PLUS POTENCIA PROMPT PUNTO PUNTOYCOMA RCORCH RLLAVE RPAREN SET TEXTO TIMES VAR WHILEsentencias : variable sentencias\n    | expresion sentencias\n    | metodos sentencias\n    | iteracion sentencias\n    | objeto PUNTOYCOMA sentencias\n    | empty\n    metodos : imprimir PUNTOYCOMA\n    | condi_anidado\n    | metodo PUNTOYCOMAvariable : VAR ID PUNTOYCOMA\n  | VAR ID IGUAL expresion PUNTOYCOMA\n  | VAR ID IGUAL condi_anidado PUNTOYCOMA\n  iteracion : FOR LPAREN ID IGUAL NUMBER PUNTOYCOMA condicion PUNTOYCOMA ID INDECREMENTAL RPAREN LLLAVE sentencias RLLAVEimprimir : CONSOLE METODO LPAREN expresion RPARENmetodo : ID METODO LPAREN RPARENmetodo : ID METODO LPAREN expresion RPARENmetodo : ID METODO LPAREN expresion COMA expresion RPARENmetodo : ID METODOobjeto : VAR ID IGUAL LLLAVE RLLAVE  \n  | VAR ID IGUAL LLLAVE keyvalue RLLAVE   \n  keyvalue : ID DOSPUNTOS factor COMA keyvalue\n  | ID DOSPUNTOS factor COMA\n  expresion : expresion PLUS factorexpresion : expresion MINUS termexpresion : expresion TIMES termexpresion : expresion DIVIDE termexpresion : expresion POTENCIA termexpresion : termcondi_anidado : condicion AND  condi_anidado\n  | NOT condicion AND  condi_anidado \n  | condicion OR  condi_anidado\n  | NOT condicion OR  condi_anidado\n  | condicion \n  | NOT condicion condicion : factor COMPARADOR factor\n    | factor IGUALA factor\n    | factor DIFERENTE factorterm : factorfactor : LPAREN expresion RPARENfactor : NUMBERfactor : TEXTOfactor : IDempty :'
     
-_lr_action_items = {'VAR':([0,],[5,]),'CONSOLE':([0,],[11,]),'NOT':([0,29,30,39,47,48,],[14,14,14,14,14,14,]),'LPAREN':([0,12,14,17,18,19,20,21,23,24,25,26,29,30,39,43,47,48,],[12,12,12,12,12,12,12,12,12,12,12,43,12,12,12,12,12,12,]),'NUMBER':([0,12,14,17,18,19,20,21,23,24,25,29,30,39,43,47,48,],[15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,]),'TEXTO':([0,12,14,17,18,19,20,21,23,24,25,29,30,39,43,47,48,],[16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,]),'ID':([0,5,12,14,17,18,19,20,21,23,24,25,29,30,39,43,47,48,],[6,22,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,]),'$end':([1,2,3,4,6,7,8,9,10,13,15,16,28,31,33,34,35,36,37,38,40,41,42,44,45,46,52,53,54,55,56,],[0,-1,-2,-3,-29,-5,-25,-15,-4,-20,-27,-28,-25,-21,-10,-11,-12,-13,-14,-6,-22,-23,-24,-26,-16,-18,-17,-19,-7,-8,-9,]),'PLUS':([3,6,8,9,15,16,27,28,33,34,35,36,37,44,49,51,],[17,-29,-25,-15,-27,-28,17,-25,-10,-11,-12,-13,-14,-26,17,17,]),'MINUS':([3,6,8,9,15,16,27,28,33,34,35,36,37,44,49,51,],[18,-29,-25,-15,-27,-28,18,-25,-10,-11,-12,-13,-14,-26,18,18,]),'TIMES':([3,6,8,9,15,16,27,28,33,34,35,36,37,44,49,51,],[19,-29,-25,-15,-27,-28,19,-25,-10,-11,-12,-13,-14,-26,19,19,]),'DIVIDE':([3,6,8,9,15,16,27,28,33,34,35,36,37,44,49,51,],[20,-29,-25,-15,-27,-28,20,-25,-10,-11,-12,-13,-14,-26,20,20,]),'POTENCIA':([3,6,8,9,15,16,27,28,33,34,35,36,37,44,49,51,],[21,-29,-25,-15,-27,-28,21,-25,-10,-11,-12,-13,-14,-26,21,21,]),'COMPARADOR':([6,8,15,16,32,44,],[-29,23,-27,-28,23,-26,]),'IGUALA':([6,8,15,16,32,44,],[-29,24,-27,-28,24,-26,]),'DIFERENTE':([6,8,15,16,32,44,],[-29,25,-27,-28,25,-26,]),'RPAREN':([6,9,15,16,27,28,33,34,35,36,37,44,51,],[-29,-15,-27,-28,44,-25,-10,-11,-12,-13,-14,-26,56,]),'PUNTOYCOMA':([6,8,9,13,15,16,22,28,31,33,34,35,36,37,40,41,42,44,45,46,49,50,52,53,],[-29,-25,-15,-20,-27,-28,38,-25,-21,-10,-11,-12,-13,-14,-22,-23,-24,-26,-16,-18,54,55,-17,-19,]),'AND':([6,13,15,16,31,40,41,42,44,],[-29,29,-27,-28,47,-22,-23,-24,-26,]),'OR':([6,13,15,16,31,40,41,42,44,],[-29,30,-27,-28,48,-22,-23,-24,-26,]),'METODO':([11,],[26,]),'IGUAL':([22,],[39,]),}
+_lr_action_items = {'VAR':([0,2,3,4,5,9,10,11,12,17,18,21,31,37,38,41,42,46,48,49,50,51,52,54,57,58,59,61,62,63,74,75,76,77,98,100,],[8,8,8,8,8,-42,-8,-38,-28,-40,-33,-41,8,-7,-9,-38,-42,-34,-23,-24,-25,-26,-27,-10,-35,-36,-37,-39,-29,-31,-30,-32,-11,-12,8,-13,]),'FOR':([0,2,3,4,5,9,10,11,12,17,18,21,31,37,38,41,42,46,48,49,50,51,52,54,57,58,59,61,62,63,74,75,76,77,98,100,],[15,15,15,15,15,-42,-8,-38,-28,-40,-33,-41,15,-7,-9,-38,-42,-34,-23,-24,-25,-26,-27,-10,-35,-36,-37,-39,-29,-31,-30,-32,-11,-12,15,-13,]),'$end':([0,1,2,3,4,5,7,9,10,11,12,17,18,21,22,23,29,30,31,37,38,41,42,46,48,49,50,51,52,53,54,57,58,59,61,62,63,74,75,76,77,100,],[-43,0,-43,-43,-43,-43,-6,-42,-8,-38,-28,-40,-33,-41,-1,-2,-3,-4,-43,-7,-9,-38,-42,-34,-23,-24,-25,-26,-27,-5,-10,-35,-36,-37,-39,-29,-31,-30,-32,-11,-12,-13,]),'CONSOLE':([0,2,3,4,5,9,10,11,12,17,18,21,31,37,38,41,42,46,48,49,50,51,52,54,57,58,59,61,62,63,74,75,76,77,98,100,],[19,19,19,19,19,-42,-8,-38,-28,-40,-33,-41,19,-7,-9,-38,-42,-34,-23,-24,-25,-26,-27,-10,-35,-36,-37,-39,-29,-31,-30,-32,-11,-12,19,-13,]),'NOT':([0,2,3,4,5,9,10,11,12,17,18,21,31,37,38,41,42,43,44,46,48,49,50,51,52,54,55,57,58,59,61,62,63,65,66,74,75,76,77,98,100,],[20,20,20,20,20,-42,-8,-38,-28,-40,-33,-41,20,-7,-9,-38,-42,20,20,-34,-23,-24,-25,-26,-27,-10,20,-35,-36,-37,-39,-29,-31,20,20,-30,-32,-11,-12,20,-13,]),'ID':([0,2,3,4,5,8,9,10,11,12,16,17,18,20,21,24,25,26,27,28,31,34,35,36,37,38,39,41,42,43,44,46,48,49,50,51,52,54,55,56,57,58,59,61,62,63,64,65,66,69,74,75,76,77,82,85,88,92,93,98,100,],[9,9,9,9,9,32,-42,-8,-38,-28,42,-40,-33,42,-41,42,42,42,42,42,9,42,42,42,-7,-9,60,-38,-42,42,42,-34,-23,-24,-25,-26,-27,-10,42,42,-35,-36,-37,-39,-29,-31,42,42,42,78,-30,-32,-11,-12,42,42,42,78,95,9,-13,]),'LPAREN':([0,2,3,4,5,9,10,11,12,15,16,17,18,20,21,24,25,26,27,28,31,33,34,35,36,37,38,41,42,43,44,45,46,48,49,50,51,52,54,55,56,57,58,59,61,62,63,64,65,66,74,75,76,77,82,85,88,98,100,],[16,16,16,16,16,-42,-8,-38,-28,39,16,-40,-33,16,-41,16,16,16,16,16,16,56,16,16,16,-7,-9,-38,-42,16,16,64,-34,-23,-24,-25,-26,-27,-10,16,16,-35,-36,-37,-39,-29,-31,16,16,16,-30,-32,-11,-12,16,16,16,16,-13,]),'NUMBER':([0,2,3,4,5,9,10,11,12,16,17,18,20,21,24,25,26,27,28,31,34,35,36,37,38,41,42,43,44,46,48,49,50,51,52,54,55,56,57,58,59,61,62,63,64,65,66,72,74,75,76,77,82,85,88,98,100,],[17,17,17,17,17,-42,-8,-38,-28,17,-40,-33,17,-41,17,17,17,17,17,17,17,17,17,-7,-9,-38,-42,17,17,-34,-23,-24,-25,-26,-27,-10,17,17,-35,-36,-37,-39,-29,-31,17,17,17,83,-30,-32,-11,-12,17,17,17,17,-13,]),'TEXTO':([0,2,3,4,5,9,10,11,12,16,17,18,20,21,24,25,26,27,28,31,34,35,36,37,38,41,42,43,44,46,48,49,50,51,52,54,55,56,57,58,59,61,62,63,64,65,66,74,75,76,77,82,85,88,98,100,],[21,21,21,21,21,-42,-8,-38,-28,21,-40,-33,21,-41,21,21,21,21,21,21,21,21,21,-7,-9,-38,-42,21,21,-34,-23,-24,-25,-26,-27,-10,21,21,-35,-36,-37,-39,-29,-31,21,21,21,-30,-32,-11,-12,21,21,21,21,-13,]),'RLLAVE':([2,3,4,5,7,9,10,11,12,17,18,21,22,23,29,30,31,37,38,41,42,46,48,49,50,51,52,53,54,57,58,59,61,62,63,69,74,75,76,77,80,92,94,98,99,100,],[-43,-43,-43,-43,-6,-42,-8,-38,-28,-40,-33,-41,-1,-2,-3,-4,-43,-7,-9,-38,-42,-34,-23,-24,-25,-26,-27,-5,-10,-35,-36,-37,-39,-29,-31,79,-30,-32,-11,-12,86,-22,-21,-43,100,-13,]),'PLUS':([3,9,11,12,17,21,40,41,42,48,49,50,51,52,61,67,71,73,87,],[24,-42,-38,-28,-40,-41,24,-38,-42,-23,-24,-25,-26,-27,-39,24,24,24,24,]),'MINUS':([3,9,11,12,17,21,40,41,42,48,49,50,51,52,61,67,71,73,87,],[25,-42,-38,-28,-40,-41,25,-38,-42,-23,-24,-25,-26,-27,-39,25,25,25,25,]),'TIMES':([3,9,11,12,17,21,40,41,42,48,49,50,51,52,61,67,71,73,87,],[26,-42,-38,-28,-40,-41,26,-38,-42,-23,-24,-25,-26,-27,-39,26,26,26,26,]),'DIVIDE':([3,9,11,12,17,21,40,41,42,48,49,50,51,52,61,67,71,73,87,],[27,-42,-38,-28,-40,-41,27,-38,-42,-23,-24,-25,-26,-27,-39,27,27,27,27,]),'POTENCIA':([3,9,11,12,17,21,40,41,42,48,49,50,51,52,61,67,71,73,87,],[28,-42,-38,-28,-40,-41,28,-38,-42,-23,-24,-25,-26,-27,-39,28,28,28,28,]),'PUNTOYCOMA':([6,11,12,13,14,17,18,21,32,33,41,42,46,48,49,50,51,52,57,58,59,61,62,63,67,68,70,74,75,79,81,83,84,86,90,91,],[31,-38,-28,37,38,-40,-33,-41,54,-18,-38,-42,-34,-23,-24,-25,-26,-27,-35,-36,-37,-39,-29,-31,76,77,-15,-30,-32,-19,-16,88,-14,-20,-17,93,]),'METODO':([9,19,],[33,45,]),'COMPARADOR':([9,11,17,21,42,47,61,],[-42,34,-40,-41,-42,34,-39,]),'IGUALA':([9,11,17,21,42,47,61,],[-42,35,-40,-41,-42,35,-39,]),'DIFERENTE':([9,11,17,21,42,47,61,],[-42,36,-40,-41,-42,36,-39,]),'RPAREN':([12,17,21,40,41,42,48,49,50,51,52,56,61,71,73,87,96,],[-28,-40,-41,61,-38,-42,-23,-24,-25,-26,-27,70,-39,81,84,90,97,]),'COMA':([12,17,21,41,42,48,49,50,51,52,61,71,89,],[-28,-40,-41,-38,-42,-23,-24,-25,-26,-27,-39,82,92,]),'AND':([17,18,21,42,46,57,58,59,61,],[-40,43,-41,-42,65,-35,-36,-37,-39,]),'OR':([17,18,21,42,46,57,58,59,61,],[-40,44,-41,-42,66,-35,-36,-37,-39,]),'IGUAL':([32,60,],[55,72,]),'LLLAVE':([55,97,],[69,98,]),'DOSPUNTOS':([78,],[85,]),'INDECREMENTAL':([95,],[96,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'sentencias':([0,],[1,]),'variable':([0,],[2,]),'expresion':([0,12,39,43,],[3,27,49,51,]),'metodos':([0,],[4,]),'condi_anidado':([0,29,30,39,47,48,],[7,45,46,50,52,53,]),'factor':([0,12,14,17,18,19,20,21,23,24,25,29,30,39,43,47,48,],[8,28,32,33,28,28,28,28,40,41,42,32,32,8,28,32,32,]),'term':([0,12,18,19,20,21,39,43,],[9,9,34,35,36,37,9,9,]),'imprimir':([0,],[10,]),'condicion':([0,14,29,30,39,47,48,],[13,31,13,13,13,13,13,]),}
+_lr_goto_items = {'sentencias':([0,2,3,4,5,31,98,],[1,22,23,29,30,53,99,]),'variable':([0,2,3,4,5,31,98,],[2,2,2,2,2,2,2,]),'expresion':([0,2,3,4,5,16,31,55,56,64,82,98,],[3,3,3,3,3,40,3,67,71,73,87,3,]),'metodos':([0,2,3,4,5,31,98,],[4,4,4,4,4,4,4,]),'iteracion':([0,2,3,4,5,31,98,],[5,5,5,5,5,5,5,]),'objeto':([0,2,3,4,5,31,98,],[6,6,6,6,6,6,6,]),'empty':([0,2,3,4,5,31,98,],[7,7,7,7,7,7,7,]),'condi_anidado':([0,2,3,4,5,31,43,44,55,65,66,98,],[10,10,10,10,10,10,62,63,68,74,75,10,]),'factor':([0,2,3,4,5,16,20,24,25,26,27,28,31,34,35,36,43,44,55,56,64,65,66,82,85,88,98,],[11,11,11,11,11,41,47,48,41,41,41,41,11,57,58,59,47,47,11,41,41,47,47,41,89,47,11,]),'term':([0,2,3,4,5,16,25,26,27,28,31,55,56,64,82,98,],[12,12,12,12,12,12,49,50,51,52,12,12,12,12,12,12,]),'imprimir':([0,2,3,4,5,31,98,],[13,13,13,13,13,13,13,]),'metodo':([0,2,3,4,5,31,98,],[14,14,14,14,14,14,14,]),'condicion':([0,2,3,4,5,20,31,43,44,55,65,66,88,98,],[18,18,18,18,18,46,18,18,18,18,18,18,91,18,]),'keyvalue':([69,92,],[80,94,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,33 +27,47 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> sentencias","S'",1,None,None,None),
-  ('sentencias -> variable','sentencias',1,'p_sentencias','sintactico.py',6),
-  ('sentencias -> expresion','sentencias',1,'p_sentencias','sintactico.py',7),
-  ('sentencias -> metodos','sentencias',1,'p_sentencias','sintactico.py',8),
-  ('metodos -> imprimir','metodos',1,'p_metodos','sintactico.py',12),
-  ('metodos -> condi_anidado','metodos',1,'p_metodos','sintactico.py',13),
-  ('variable -> VAR ID PUNTOYCOMA','variable',3,'p_variable','sintactico.py',17),
-  ('variable -> VAR ID IGUAL expresion PUNTOYCOMA','variable',5,'p_variable','sintactico.py',18),
-  ('variable -> VAR ID IGUAL condi_anidado PUNTOYCOMA','variable',5,'p_variable','sintactico.py',19),
-  ('imprimir -> CONSOLE METODO LPAREN expresion RPAREN','imprimir',5,'p_imprimir','sintactico.py',23),
-  ('expresion -> expresion PLUS factor','expresion',3,'p_expresion_suma','sintactico.py',26),
-  ('expresion -> expresion MINUS term','expresion',3,'p_expresion_resta','sintactico.py',29),
-  ('expresion -> expresion TIMES term','expresion',3,'p_expresion_producto','sintactico.py',32),
-  ('expresion -> expresion DIVIDE term','expresion',3,'p_expresion_division','sintactico.py',35),
-  ('expresion -> expresion POTENCIA term','expresion',3,'p_expresion_potencia','sintactico.py',38),
-  ('expresion -> term','expresion',1,'p_expression_term','sintactico.py',41),
-  ('condi_anidado -> condicion AND condi_anidado','condi_anidado',3,'p_condicion_operador','sintactico.py',45),
-  ('condi_anidado -> NOT condicion AND condi_anidado','condi_anidado',4,'p_condicion_operador','sintactico.py',46),
-  ('condi_anidado -> condicion OR condi_anidado','condi_anidado',3,'p_condicion_operador','sintactico.py',47),
-  ('condi_anidado -> NOT condicion OR condi_anidado','condi_anidado',4,'p_condicion_operador','sintactico.py',48),
-  ('condi_anidado -> condicion','condi_anidado',1,'p_condicion_operador','sintactico.py',49),
-  ('condi_anidado -> NOT condicion','condi_anidado',2,'p_condicion_operador','sintactico.py',50),
-  ('condicion -> factor COMPARADOR factor','condicion',3,'p_condicion','sintactico.py',54),
-  ('condicion -> factor IGUALA factor','condicion',3,'p_condicion','sintactico.py',55),
-  ('condicion -> factor DIFERENTE factor','condicion',3,'p_condicion','sintactico.py',56),
-  ('term -> factor','term',1,'p_term_factor','sintactico.py',59),
-  ('factor -> LPAREN expresion RPAREN','factor',3,'p_factor_expr','sintactico.py',62),
-  ('factor -> NUMBER','factor',1,'p_factor_num','sintactico.py',65),
-  ('factor -> TEXTO','factor',1,'p_factor_str','sintactico.py',68),
-  ('factor -> ID','factor',1,'p_factor_var2','sintactico.py',71),
+  ('sentencias -> variable sentencias','sentencias',2,'p_sentencias','sintactico.py',6),
+  ('sentencias -> expresion sentencias','sentencias',2,'p_sentencias','sintactico.py',7),
+  ('sentencias -> metodos sentencias','sentencias',2,'p_sentencias','sintactico.py',8),
+  ('sentencias -> iteracion sentencias','sentencias',2,'p_sentencias','sintactico.py',9),
+  ('sentencias -> objeto PUNTOYCOMA sentencias','sentencias',3,'p_sentencias','sintactico.py',10),
+  ('sentencias -> empty','sentencias',1,'p_sentencias','sintactico.py',11),
+  ('metodos -> imprimir PUNTOYCOMA','metodos',2,'p_metodos','sintactico.py',15),
+  ('metodos -> condi_anidado','metodos',1,'p_metodos','sintactico.py',16),
+  ('metodos -> metodo PUNTOYCOMA','metodos',2,'p_metodos','sintactico.py',17),
+  ('variable -> VAR ID PUNTOYCOMA','variable',3,'p_variable','sintactico.py',21),
+  ('variable -> VAR ID IGUAL expresion PUNTOYCOMA','variable',5,'p_variable','sintactico.py',22),
+  ('variable -> VAR ID IGUAL condi_anidado PUNTOYCOMA','variable',5,'p_variable','sintactico.py',23),
+  ('iteracion -> FOR LPAREN ID IGUAL NUMBER PUNTOYCOMA condicion PUNTOYCOMA ID INDECREMENTAL RPAREN LLLAVE sentencias RLLAVE','iteracion',14,'p_for','sintactico.py',28),
+  ('imprimir -> CONSOLE METODO LPAREN expresion RPAREN','imprimir',5,'p_imprimir','sintactico.py',32),
+  ('metodo -> ID METODO LPAREN RPAREN','metodo',4,'p_metodo_argumento0','sintactico.py',36),
+  ('metodo -> ID METODO LPAREN expresion RPAREN','metodo',5,'p_metodo_argumento1','sintactico.py',39),
+  ('metodo -> ID METODO LPAREN expresion COMA expresion RPAREN','metodo',7,'p_metodo_argumento2','sintactico.py',42),
+  ('metodo -> ID METODO','metodo',2,'p_metodo_argumento3','sintactico.py',46),
+  ('objeto -> VAR ID IGUAL LLLAVE RLLAVE','objeto',5,'p_objeto','sintactico.py',50),
+  ('objeto -> VAR ID IGUAL LLLAVE keyvalue RLLAVE','objeto',6,'p_objeto','sintactico.py',51),
+  ('keyvalue -> ID DOSPUNTOS factor COMA keyvalue','keyvalue',5,'p_objeto_kv','sintactico.py',55),
+  ('keyvalue -> ID DOSPUNTOS factor COMA','keyvalue',4,'p_objeto_kv','sintactico.py',56),
+  ('expresion -> expresion PLUS factor','expresion',3,'p_expresion_suma','sintactico.py',60),
+  ('expresion -> expresion MINUS term','expresion',3,'p_expresion_resta','sintactico.py',63),
+  ('expresion -> expresion TIMES term','expresion',3,'p_expresion_producto','sintactico.py',66),
+  ('expresion -> expresion DIVIDE term','expresion',3,'p_expresion_division','sintactico.py',69),
+  ('expresion -> expresion POTENCIA term','expresion',3,'p_expresion_potencia','sintactico.py',72),
+  ('expresion -> term','expresion',1,'p_expression_term','sintactico.py',75),
+  ('condi_anidado -> condicion AND condi_anidado','condi_anidado',3,'p_condicion_operador','sintactico.py',79),
+  ('condi_anidado -> NOT condicion AND condi_anidado','condi_anidado',4,'p_condicion_operador','sintactico.py',80),
+  ('condi_anidado -> condicion OR condi_anidado','condi_anidado',3,'p_condicion_operador','sintactico.py',81),
+  ('condi_anidado -> NOT condicion OR condi_anidado','condi_anidado',4,'p_condicion_operador','sintactico.py',82),
+  ('condi_anidado -> condicion','condi_anidado',1,'p_condicion_operador','sintactico.py',83),
+  ('condi_anidado -> NOT condicion','condi_anidado',2,'p_condicion_operador','sintactico.py',84),
+  ('condicion -> factor COMPARADOR factor','condicion',3,'p_condicion','sintactico.py',88),
+  ('condicion -> factor IGUALA factor','condicion',3,'p_condicion','sintactico.py',89),
+  ('condicion -> factor DIFERENTE factor','condicion',3,'p_condicion','sintactico.py',90),
+  ('term -> factor','term',1,'p_term_factor','sintactico.py',93),
+  ('factor -> LPAREN expresion RPAREN','factor',3,'p_factor_expr','sintactico.py',96),
+  ('factor -> NUMBER','factor',1,'p_factor_num','sintactico.py',99),
+  ('factor -> TEXTO','factor',1,'p_factor_str','sintactico.py',102),
+  ('factor -> ID','factor',1,'p_factor_var2','sintactico.py',105),
+  ('empty -> <empty>','empty',0,'p_empty','sintactico.py',109),
 ]
