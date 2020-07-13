@@ -1,20 +1,21 @@
+
 import ply.yacc as sintaxis
 import lexico as lex
 tokens = lex.tokens
 
+
 #Ojo a 'expresion'
 def p_sentencias(p):
     '''sentencias : variable sentencias
-    | expresion sentencias
     | metodos sentencias
     | iteracion sentencias
     | objeto PUNTOYCOMA sentencias
     | newset sentencias
     | array sentencias
     | empty
-    | if
-    | while
-    | prompt
+    | if sentencias
+    | while sentencias
+    | prompt sentencias
     '''
 
 def p_metodos(p):
@@ -24,19 +25,24 @@ def p_metodos(p):
 
 #var _var; var a58a= ''; var _As=54;
 def p_variable(p):
-   '''variable : VAR ID PUNTOYCOMA
-  | VAR ID IGUAL expresion PUNTOYCOMA
-  | VAR ID IGUAL condi_anidado PUNTOYCOMA
+   '''variable : VAR ID PUNTOYCOMA 
+  | VAR ID IGUAL expresion PUNTOYCOMA 
+  | VAR ID IGUAL condi_anidado PUNTOYCOMA 
   '''
 
-#for(i=0; i<=8; i--){}  
+#for(i=0; i<=8; i--){sentencias}  
+#for(i=0; i<=8; i+=5){sentencias}  
 def p_for(p):
-  '''iteracion : FOR LPAREN ID IGUAL NUMBER PUNTOYCOMA condicion PUNTOYCOMA ID INDECREMENTAL RPAREN LLLAVE sentencias RLLAVE'''
+  '''iteracion : FOR LPAREN ID IGUAL NUMBER PUNTOYCOMA condicion PUNTOYCOMA ID INDECREMENTAL RPAREN LLLAVE sentencias RLLAVE
+  | FOR LPAREN VAR ID IGUAL NUMBER PUNTOYCOMA condicion PUNTOYCOMA ID INDECREMENTAL RPAREN LLLAVE sentencias RLLAVE
+  | FOR LPAREN ID IGUAL NUMBER PUNTOYCOMA condicion PUNTOYCOMA ID OPERADORES NUMBER RPAREN LLLAVE sentencias RLLAVE
+  | FOR LPAREN VAR ID IGUAL NUMBER PUNTOYCOMA condicion PUNTOYCOMA ID OPERADORES NUMBER RPAREN LLLAVE sentencias RLLAVE'''
   
 
 def p_if(p):
   '''if : IF LPAREN condi_anidado RPAREN LLLAVE sentencias RLLAVE
   | IF LPAREN condi_anidado RPAREN LLLAVE sentencias RLLAVE else
+  | IF LPAREN condi_anidado RPAREN LLLAVE sentencias RLLAVE elif
   | IF LPAREN condi_anidado RPAREN LLLAVE sentencias RLLAVE elif else
   '''
 
@@ -81,8 +87,14 @@ def p_objeto(p):
   '''
 #a:8,   b:"a", c:8.5
 def p_objeto_kv(p):
-  '''keyvalue : ID DOSPUNTOS factor COMA keyvalue
-  | ID DOSPUNTOS factor COMA
+  '''keyvalue : ID DOSPUNTOS factor
+  | ID DOSPUNTOS factor COMA keyvalue
+  | ID DOSPUNTOS contenido
+  | ID DOSPUNTOS contenido COMA keyvalue
+  | ID DOSPUNTOS TRUE 
+  | ID DOSPUNTOS TRUE COMA keyvalue
+  | ID DOSPUNTOS FALSE 
+  | ID DOSPUNTOS FALSE COMA keyvalue
   '''
 
 def p_set(p):#confirma Movarreira
@@ -168,19 +180,60 @@ def p_empty(p):
 
 # Error generado
 def p_error(p):
-  print("Error de sintaxis: ",p)
+  print("Error de sintaxis",p)
+
 # Construir parser
 
- 
-
 def sintactico():
-  parser = sintaxis.yacc()
-
+  parser = sintaxis.yacc()  
   while True:
       try:
           s = input(">")
+
       except EOFError:
-          break
+        break
+
       if not s: continue
       result = parser.parse(s)
       print(result)
+
+#Roger Avilés
+'''
+var i; 
+var _a2 = []; /*Prueba comentarios*/ 
+var A=["a", 5.5]; 
+var set= new Set(); 
+var set= new Set([]); 
+var set= new Set(['a',5]); 
+var set1 =5;
+for(var i=1; i<=0; i+=2){console.log('a');}
+for(var i=1; i<=0; i--){console.log(5+2);}
+/*Comentario*/ var i;
+// var i;
+'''
+
+#Ejemplos de Livingston
+'''
+#Ejemplos correctos
+if (3>5){ console.log('Verdadero');} else{ console.log('Falso');}
+
+var a = prompt("Primer Nivel", "Hola Mundo");
+
+while (true){ console.log('AP en Lenguaje de Programacion'); }
+
+#Ejemplos de errores
+var texto = "hola mundo"
+
+if(a>b{var a = 10;}
+
+var er 2 +3
+
+'''
+
+#Ejemplos de Víctor Moyano 
+'''if(a>b){var a = 10;}
+var conjunto = new Set(["hola","como","estas"]);
+console.log("Si se pasa la materia");
+var variable = 2;
+conjunto.index();
+conjunto.metodo("par1",2);'''

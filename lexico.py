@@ -22,7 +22,7 @@ tokens = [
     "TIMES",
     "DIVIDE",
     "POTENCIA",
-    "PUNTO",
+#    "PUNTO",
     "PUNTOYCOMA",
     "LPAREN",
     "RPAREN",
@@ -31,8 +31,8 @@ tokens = [
     "LLLAVE",
     "RLLAVE",
     "COMA",
-    "COMILLA",
-    "COMILLITA",
+#    "COMILLA",
+#    "COMILLITA",
     "ID",
     "IGUAL",
     "DOSPUNTOS",
@@ -58,7 +58,7 @@ t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_POTENCIA = r'\*\*'
 #Simbolos
-t_PUNTO = r'\.'
+#t_PUNTO = r'\.'
 t_PUNTOYCOMA = r'\;'
 t_IGUAL = r'='
 t_DOSPUNTOS = r':'
@@ -69,8 +69,8 @@ t_RCORCH = r'\]'
 t_LLLAVE = r'\{'
 t_RLLAVE = r'\}'
 t_COMA = r'\,'
-t_COMILLA = r'\"'
-t_COMILLITA = r'\''
+#t_COMILLA = r'\"'
+#t_COMILLITA = r'\''
 t_INDECREMENTAL = r'(\+\+|--)'
 #t_INCREMENTAL = r'\+\+'
 #t_DECREMENTAL = r'--'
@@ -146,7 +146,7 @@ def lexenizador(data, mensaje):
       print(tok)
 
 
-print("EJEMPLOS DE ROGER\n")
+#print("EJEMPLOS DE ROGER\n")
 #9 lineas validadas de los integrantes
 data1 = """for( var i=0 ; i<8 ; i++ ){
     /*Comentario mi llave*/ 
@@ -169,9 +169,9 @@ data2 = """while( (5>=8 && !(9<2)) || x<y || a!=b){
 data3 = """var nombre =prompt('Ingrese su nombre:');
 nombre.length"""
 
-lexenizador(data1, "Ejercicio 1")
+#lexenizador(data1, "Ejercicio 1")
 #lexenizador(data2, "Ejercicio 2")
-#lexenizador(data3, "Ejercicio 3")
+lexenizador(data3, "Ejercicio 3")
 """
 print("\nEJEMPLOS DE VICTOR\n")
 
