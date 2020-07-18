@@ -8,12 +8,12 @@
 'Creada las condicionales anidadas, falta preguntar si se desea que se agrupen por parentesis'
 'Creado metodos de 0,1 y 2 argumentos, tambien sintaxis de los atributos y sintaxis para imprimir.'
 'Agregada produccion "empty" para cerrar ciclos infinitos'
-
-
-'--------FALTA'
-'Estructura if-else y while' (yala)
-'Definir set' (yala)
-'Definir Array' (yala)
+'Estructura if-else y while' 
+'Definir set' 
+'Definir Array' 
+'Definir el true y false como palabra reservada'
 'Estructura del Prompt'
 'Presentar mensajes personalizados'
-'Definir el true y false como palabra reservada'
+
+'--------FALTA'
+'Hacer GUI y conectar los errores'

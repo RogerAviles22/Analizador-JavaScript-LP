@@ -8,6 +8,7 @@ reserved = {
   'var' : 'VAR',
   'while' : 'WHILE',
   'Set': 'SET',
+  'Array' : 'ARRAY',
   'console': 'CONSOLE',
   'prompt' : 'PROMPT',
   'new' : 'NEW',
@@ -83,6 +84,7 @@ t_FOR = r'for'
 t_VAR = r'var'
 t_WHILE = r'while'
 t_SET = r'Set'
+t_ARRAY = r'Array'
 t_NEW = r'new'
 t_CONSOLE = r'console'
 t_PROMPT = r'prompt'
@@ -131,12 +133,11 @@ def t_error(t):
     print("Caracter no Definido '%s'" % t.value[0])
     t.lexer.skip(1)  #skip(n) Omite n caracteres del input
 
-def lexenizador(data, mensaje):
-  print("\nCódigo: \n"+data+"\n")
+def lexenizador(data):
+  #print("\nCódigo: \n"+data+"\n")
   #Construir el lexer, el encargado de identificar los tokens que han sido definidos
   lexer = lex.lex()
   lexer.input(data)
-  print(mensaje)
   while True:
     #Devuelve los tokens que coincida con la entrada
       tok = lexer.token() 
@@ -171,7 +172,7 @@ nombre.length"""
 
 #lexenizador(data1, "Ejercicio 1")
 #lexenizador(data2, "Ejercicio 2")
-lexenizador(data3, "Ejercicio 3")
+lexenizador("")
 """
 print("\nEJEMPLOS DE VICTOR\n")
 

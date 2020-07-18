@@ -1,9 +1,9 @@
-
 import ply.yacc as sintaxis
 import lexico as lex
+
 tokens = lex.tokens
-
-
+#parser = sintaxis.yacc()  
+bandera = True
 #Ojo a 'expresion'
 def p_sentencias(p):
     '''sentencias : variable sentencias
@@ -97,12 +97,13 @@ def p_objeto_kv(p):
   | ID DOSPUNTOS FALSE COMA keyvalue
   '''
 
-def p_set(p):#confirma Movarreira
+def p_set(p):#confirma Moyarreira
   '''newset : VAR ID IGUAL NEW SET LPAREN RPAREN PUNTOYCOMA
   | VAR ID IGUAL NEW SET LPAREN contenido RPAREN PUNTOYCOMA'''
 
 def p_array(p):
-  'array : VAR ID IGUAL contenido PUNTOYCOMA'
+  '''array : VAR ID IGUAL contenido PUNTOYCOMA
+  | VAR ID IGUAL NEW ARRAY LPAREN elemento RPAREN'''
 
 def p_contenido(p):
   '''contenido : LCORCH elemento RCORCH
@@ -180,22 +181,39 @@ def p_empty(p):
 
 # Error generado
 def p_error(p):
-  print("Error de sintaxis",p)
+  global bandera
+  if p:
+    print("Error sintactico del token en la línea: ", p.lineno, " en la posición: ",  p.lexpos, " y token tipo:", p.type)
+    bandera = False
+    # Just discard the token and tell the parser it's okay.
+    #p.errok()
+  else:
+        print("Syntax error at EOF")
+        bandera = False
 
 # Construir parser
 
-def sintactico():
-  parser = sintaxis.yacc()  
-  while True:
+def sintactico(data):
+  parser = sintaxis.yacc() 
+  result = parser.parse(data)
+  if(not bandera):
+        print("Sintaxis Incorrecta")
+  else:
+    print("Correcto")
+
+  #s= input(data)
+  '''while True:
       try:
-          s = input(">")
+          s = parser.parse(data)
 
       except EOFError:
         break
 
       if not s: continue
-      result = parser.parse(s)
-      print(result)
+      result = parser.parse(data)
+      #print("Lexpos: ",parser.parse(result,tracking=True))
+      if(result == None):
+        print("Sintaxis Correcta")   '''
 
 #Roger Avilés
 '''
