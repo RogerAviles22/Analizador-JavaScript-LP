@@ -1,9 +1,14 @@
 import ply.yacc as sintaxis
 import lexico as lex
 
+#import Interfaz as inter
 tokens = lex.tokens
 #parser = sintaxis.yacc()  
 bandera = True
+
+message = ""
+#message2 = ""
+
 #Ojo a 'expresion'
 def p_sentencias(p):
     '''sentencias : variable sentencias
@@ -20,7 +25,6 @@ def p_sentencias(p):
 
 def p_metodos(p):
     '''metodos : imprimir PUNTOYCOMA
-    | condi_anidado
     | metodo PUNTOYCOMA'''
 
 #var _var; var a58a= ''; var _As=54;
@@ -103,7 +107,7 @@ def p_set(p):#confirma Moyarreira
 
 def p_array(p):
   '''array : VAR ID IGUAL contenido PUNTOYCOMA
-  | VAR ID IGUAL NEW ARRAY LPAREN elemento RPAREN'''
+  | VAR ID IGUAL NEW ARRAY LPAREN elemento RPAREN PUNTOYCOMA'''
 
 def p_contenido(p):
   '''contenido : LCORCH elemento RCORCH
@@ -182,38 +186,86 @@ def p_empty(p):
 # Error generado
 def p_error(p):
   global bandera
+  global message
+  #global message2
   if p:
+    #inter.errorSint.appendPlainText("hola")
     print("Error sintactico del token en la línea: ", p.lineno, " en la posición: ",  p.lexpos, " y token tipo:", p.type)
+
+
+    line =str(p.lineno)
+    lexp =str(p.lexpos)
+    type =str(p.type)
+    #message = str("Error sintactico del token en la línea: " ,p.lineno, " en la posición: " , p.lexpos , " y token tipo:" , p.type)
+    #print(message)
+    message += "Error sintactico del token en la línea: "+ line+ " en la posición: "+ lexp+ " y token tipo: "+type+"\n"
+    #print(message)
+
+
+    #message2 = ' '.join(message)
+    #print(message2)
+
     bandera = False
     # Just discard the token and tell the parser it's okay.
     #p.errok()
   else:
-        print("Syntax error at EOF")
+        #print("Syntax error at EOF")
+
+        message = "Syntax error at EOF"
+        print(message)
+
         bandera = False
 
 # Construir parser
 
 def sintactico(data):
-  parser = sintaxis.yacc() 
+    global bandera
+    global message
+    #global mes
+    #sintok = []
+
+    parser = sintaxis.yacc()
+    result = parser.parse(data)
+    if(not bandera):
+        sintok = []
+        #print("hola" + message)
+        sintok.append("Sintaxis Incorrecta")
+        sintok.append(message)
+        #print("Sintaxis Incorrecta")
+        bandera = True
+        print(sintok)
+        message = ""
+        return sintok
+
+
+        #return message2
+    else:
+        sintok = []
+    #print("Sintaxis Correcta")
+        bandera = True
+        #return "Sintaxis Correcta"
+
+        sintok.append("Sintaxis Correcta")
+        message = ""
+        return sintok
+
+
+
+
+
+    #s= input(data)
+'''while True:
+  try:
+      s = parser.parse(data)
+
+  except EOFError:
+    break
+
+  if not s: continue
   result = parser.parse(data)
-  if(not bandera):
-        print("Sintaxis Incorrecta")
-  else:
-    print("Correcto")
-
-  #s= input(data)
-  '''while True:
-      try:
-          s = parser.parse(data)
-
-      except EOFError:
-        break
-
-      if not s: continue
-      result = parser.parse(data)
-      #print("Lexpos: ",parser.parse(result,tracking=True))
-      if(result == None):
-        print("Sintaxis Correcta")   '''
+  #print("Lexpos: ",parser.parse(result,tracking=True))
+  if(result == None):
+    print("Sintaxis Correcta")   '''
 
 #Roger Avilés
 '''

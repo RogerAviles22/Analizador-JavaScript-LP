@@ -1,5 +1,7 @@
 import ply.lex as lex
 
+msg_error = ""
+
 reserved = {
   'if' : 'IF',
   'else' : 'ELSE',
@@ -106,7 +108,7 @@ t_TEXTO = r'(\'[a-zA-Z0-9\!\s\.,:À-ÿ\u00f1\u00d1]*\'|\"[a-zA-Z0-9\!\s\.,:À-ÿ
 #Ej: var paises = ['Ecuador', 'Chile', 'Venezuela', 'Argentina'] todo desde 'Ecuador...Argentina' lo considera texto
 t_METODO = r'\.([a-z]|[A-Z])+'
 #Ignora los espacios y tab
-t_ignore = " \t\n"
+t_ignore = " \t"
 #Ignora los comentarios que empiezan con numeral // o /* */
 t_ignore_COMMENT = r'(//.*|/\*.*\*/)'
 
@@ -124,27 +126,45 @@ def t_ID(t):
     t.type = reserved.get(t.value, 'ID')  # Check for reserved words
     return t
 
-#No identifica el número de linea que va leyendo
+# No identifica el número de linea que va leyendo
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value) #t.lineno es el número de línea actual
 
 def t_error(t):
+    global msg_error
     print("Caracter no Definido '%s'" % t.value[0])
+    msg_error += "Caracter no Definido '%s'" % t.value[0] +"\n"
     t.lexer.skip(1)  #skip(n) Omite n caracteres del input
 
 def lexenizador(data):
-  #print("\nCódigo: \n"+data+"\n")
-  #Construir el lexer, el encargado de identificar los tokens que han sido definidos
-  lexer = lex.lex()
-  lexer.input(data)
-  while True:
+
+    lextok=[]
+    global msg_error
+    #toklex=""
+    #print("\nCódigo: \n"+data+"\n")
+    #Construir el lexer, el encargado de identificar los tokens que han sido definidos
+    lexer = lex.lex()
+    lexer.input(data)
+    while True:
     #Devuelve los tokens que coincida con la entrada
-      tok = lexer.token() 
-      if not tok:
+        tok = lexer.token()
+        if not tok:
           break
-      #print("LexToken(t.type, t.value, t.lineno, t.lexpos)")
-      print(tok)
+        #print("LexToken(t.type, t.value, t.lineno, t.lexpos)")
+        #print(tok)
+        #toklex=tok
+        lextok.append(str(tok))
+
+        #print(lextok)
+    #print(lextok)
+    #return lextok
+    lextok.append(str(msg_error))
+    msg_error = ""
+    return lextok
+
+    #for i in lextok:
+        #print(i)
 
 
 #print("EJEMPLOS DE ROGER\n")
