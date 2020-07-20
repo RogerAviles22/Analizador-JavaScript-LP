@@ -74,11 +74,11 @@ def p_imprimir(p):
 def p_metodo_argumento0(p):
   'metodo : ID METODO LPAREN RPAREN'
 
-def p_metodo_argumento1(p):
-  'metodo : ID METODO LPAREN expresion RPAREN'
+def p_metodo_argumenton(p):
+  'metodo : ID METODO LPAREN elemento RPAREN'
 
-def p_metodo_argumento2(p):
-  'metodo : ID METODO LPAREN expresion COMA expresion RPAREN'
+#def p_metodo_argumento2(p):
+#  'metodo : ID METODO LPAREN expresion COMA expresion RPAREN'
   
 #No es un método, en sí sería el atributo de una variable
 def p_metodo_argumento3(p):
