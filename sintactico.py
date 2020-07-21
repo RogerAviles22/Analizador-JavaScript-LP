@@ -31,7 +31,10 @@ def p_metodos(p):
 def p_variable(p):
    '''variable : VAR ID PUNTOYCOMA 
   | VAR ID IGUAL expresion PUNTOYCOMA 
-  | VAR ID IGUAL condi_anidado PUNTOYCOMA 
+  | VAR ID IGUAL condi_anidado PUNTOYCOMA
+  | VAR ID IGUAL metodo PUNTOYCOMA
+  | ID INDECREMENTAL PUNTOYCOMA
+  | ID OPERADORES NUMBER PUNTOYCOMA 
   '''
 
 #for(i=0; i<=8; i--){sentencias}  
